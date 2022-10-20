@@ -1,32 +1,32 @@
 // SELECTOR
 // MAIN AUDIO
-const audioContainer = document.querySelector('#audio-container');
-const audio = document.querySelector('#main-audio');
+const audioContainer = document.querySelector("#audio-container");
+const audio = document.querySelector("#main-audio");
 // SHOW THUMBNAIL, TITLE AND ARTIST SONGS
-const thumbnailSongs = document.querySelector('#thumbnail');
-const titleSongs = document.querySelector('#titleSongs');
-const artistSongs = document.querySelector('#artist');
+const thumbnailSongs = document.querySelector("#thumbnail");
+const titleSongs = document.querySelector("#titleSongs");
+const artistSongs = document.querySelector("#artist");
 // BUTTONS
-const prevBtn = document.querySelector('.prev');
-const playBtn = document.querySelector('.play');
-const nextBtn = document.querySelector('.next');
+const prevBtn = document.querySelector(".prev");
+const playBtn = document.querySelector(".play");
+const nextBtn = document.querySelector(".next");
 // PROGRESS
-const progressContainer = document.querySelector('#progress-container');
-const progress = document.querySelector('#progress');
+const progressContainer = document.querySelector("#progress-container");
+const progress = document.querySelector("#progress");
 // TIME SONGS
-const currTime = document.querySelector('.time-left-songs');
-const durTime = document.querySelector('.time-right-songs');
+const currTime = document.querySelector(".time-left-songs");
+const durTime = document.querySelector(".time-right-songs");
 // VOLUME SONGS
-const volumeSongs = document.querySelector('.volume-songs');
-const volumeIcon = document.querySelector('#volume-icon');
-const progressVolumeContainer = document.querySelector('.progress-volume-container');
-const progressVolume = document.querySelector('.progress-volume');
+const volumeSongs = document.querySelector(".volume-songs");
+const volumeIcon = document.querySelector("#volume-icon");
+const progressVolumeContainer = document.querySelector(".progress-volume-container");
+const progressVolume = document.querySelector(".progress-volume");
 // LIST SONGS
-const listSongs = document.querySelectorAll('.title-list-rkj p');
+const listSongs = document.querySelectorAll(".title-list-rkj p");
 
 let songIndex = 0;
 // CREATE CONTENT LOAD
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener("DOMContentLoaded", () => {
   const item = musicRkj[songIndex];
 
   thumbnailSongs.src = item.image;
@@ -47,27 +47,27 @@ let show = (showMusic) => {
 
 // PLAY SONGS
 let playSong = () => {
-  audioContainer.classList.add('play');
+  audioContainer.classList.add("play");
 
-  playBtn.querySelector('i.fa-solid').classList.remove('fa-play');
-  playBtn.querySelector('i.fa-solid').classList.add('fa-pause');
+  playBtn.querySelector("i.fa-solid").classList.remove("fa-play");
+  playBtn.querySelector("i.fa-solid").classList.add("fa-pause");
 
   audio.play();
 };
 
 // PAUSE SONGS
 let pauseSong = () => {
-  audioContainer.classList.remove('play');
+  audioContainer.classList.remove("play");
 
-  playBtn.querySelector('i.fa-solid').classList.add('fa-play');
-  playBtn.querySelector('i.fa-solid').classList.remove('fa-pause');
+  playBtn.querySelector("i.fa-solid").classList.add("fa-play");
+  playBtn.querySelector("i.fa-solid").classList.remove("fa-pause");
 
   audio.pause();
 };
 
-playBtn.addEventListener('click', () => {
+playBtn.addEventListener("click", () => {
   //   CONDITIONAL PLAY SONGS AND PAUSE SONGS
-  const isPlaying = audioContainer.classList.contains('play');
+  const isPlaying = audioContainer.classList.contains("play");
 
   if (isPlaying) {
     pauseSong();
@@ -77,7 +77,7 @@ playBtn.addEventListener('click', () => {
 });
 
 // NEXT SONGS
-nextBtn.addEventListener('click', () => {
+nextBtn.addEventListener("click", () => {
   songIndex++;
 
   if (songIndex > musicRkj.length - 1) {
@@ -88,7 +88,7 @@ nextBtn.addEventListener('click', () => {
   playSong();
 });
 
-audio.addEventListener('ended', () => {
+audio.addEventListener("ended", () => {
   songIndex++;
 
   if (songIndex > musicRkj.length - 1) {
@@ -100,7 +100,7 @@ audio.addEventListener('ended', () => {
 });
 
 // PREVIOUS SONGS
-prevBtn.addEventListener('click', () => {
+prevBtn.addEventListener("click", () => {
   songIndex--;
 
   if (songIndex < 0) {
@@ -112,7 +112,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 // UPDATE PROGRESS BAR
-audio.addEventListener('timeupdate', (e) => {
+audio.addEventListener("timeupdate", (e) => {
   const { duration, currentTime } = e.srcElement;
   const progressPercent = (currentTime / duration) * 100;
 
@@ -120,7 +120,7 @@ audio.addEventListener('timeupdate', (e) => {
 });
 
 // SET PROGRESS BAR
-progressContainer.addEventListener('click', function (e) {
+progressContainer.addEventListener("click", function (e) {
   const width = this.clientWidth;
   const clickX = e.offsetX;
   const duration = audio.duration;
@@ -130,7 +130,7 @@ progressContainer.addEventListener('click', function (e) {
 
 // GET CURRENT AND DURATION SONGS
 // GET CURRENT TIME
-audio.addEventListener('timeupdate', () => {
+audio.addEventListener("timeupdate", () => {
   const mainCurrentTime = audio.currentTime;
   let currentMin = Math.floor(mainCurrentTime / 60);
   let currentSec = Math.floor(mainCurrentTime % 60);
@@ -142,7 +142,7 @@ audio.addEventListener('timeupdate', () => {
   currTime.innerText = `${currentMin}:${currentSec}`;
 });
 // GET DURATION TIME
-audio.addEventListener('loadeddata', () => {
+audio.addEventListener("loadeddata", () => {
   const mainDuration = audio.duration;
   let totalMin = Math.floor(mainDuration / 60);
   let totalSec = Math.floor(mainDuration % 60);
@@ -156,7 +156,7 @@ audio.addEventListener('loadeddata', () => {
 
 // CLICK LIST SONGS
 for (let i = 0; i < listSongs.length; i++) {
-  listSongs[i].addEventListener('click', () => {
+  listSongs[i].addEventListener("click", () => {
     const item = musicRkj[i];
     thumbnailSongs.src = item.image;
     titleSongs.textContent = item.title;
@@ -168,27 +168,27 @@ for (let i = 0; i < listSongs.length; i++) {
 
 // SET VOLUME MUTE AND UNMUTE
 let fullVolumeSongs = () => {
-  volumeSongs.classList.remove('mute');
+  volumeSongs.classList.remove("mute");
 
-  volumeIcon.querySelector('i.fa-solid').classList.remove('fa-volume-xmark');
-  volumeIcon.querySelector('i.fa-solid').classList.add('fa-volume-high');
+  volumeIcon.querySelector("i.fa-solid").classList.remove("fa-volume-xmark");
+  volumeIcon.querySelector("i.fa-solid").classList.add("fa-volume-high");
 
   audio.volume = 1.0;
-  progressVolume.style.width = '100%';
+  progressVolume.style.width = "100%";
 };
 
 let muteSongs = () => {
-  volumeSongs.classList.add('mute');
+  volumeSongs.classList.add("mute");
 
-  volumeIcon.querySelector('i.fa-solid').classList.add('fa-volume-xmark');
-  volumeIcon.querySelector('i.fa-solid').classList.remove('fa-volume-high');
+  volumeIcon.querySelector("i.fa-solid").classList.add("fa-volume-xmark");
+  volumeIcon.querySelector("i.fa-solid").classList.remove("fa-volume-high");
 
   audio.volume = 0;
-  progressVolume.style.width = '0%';
+  progressVolume.style.width = "0%";
 };
 
-volumeIcon.addEventListener('click', () => {
-  const isVolume = volumeSongs.classList.contains('mute');
+volumeIcon.addEventListener("click", () => {
+  const isVolume = volumeSongs.classList.contains("mute");
 
   if (isVolume) {
     fullVolumeSongs();
